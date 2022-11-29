@@ -1,12 +1,13 @@
 <?php
+session_start();
 // importo functions
-include __DIR__ .'/functions.php';
-// controllo if lunghezza is set per chiamarci dentro funzione
+include __DIR__ .'/functions/functions.php';
+// controllo if lunghezza is set e non vuota per chiamarci dentro funzione
 if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
     $password = pswGen($_GET['lunghezza']);
-    echo $password;
+    $_SESSION['psw'] = $password;
+    header('Location: ./results.php');
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +23,8 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
 </head>
 <body>
     <form action="index.php" method="GET">
-        <input type="number" name="lunghezza" placeholder="lunghezza psw">
+        <label for="">Imposta un numero per la lunghezza della tua password</label>
+        <input type="number" name="lunghezza" placeholder="Inserisci un numero">
         <button type="submit">Invia</button>
     </form>
 </body>

@@ -26,16 +26,25 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
     <h2 class="text-white text-center">Genera una password sicura</h2>
     <div class="vz_container">
         <form action="index.php" method="GET">
-            <div class="d-flex justify-content-between pb-3">
+            <div class="d-flex justify-content-between pb-5">
                 <label for="">Lunghezza della tua password</label>
                 <input type="number" name="lunghezza" placeholder="Inserisci un numero">
             </div>
             <div class="d-flex justify-content-between pb-3">
                 <label for="">Consenti ripetizioni di uno o più caratteri</label>
-                <input type="radio" name="ripeti" id="ripeti" value="ripeti"> sì
-                <input type="radio" name="non-rip" id="non-rip" value="non-rip"> no
+                <div class="d-flex flex-column">
+                    <div>
+                        <input type="radio" name="ripeti" id="ripeti" value="ripeti">
+                        <label for="ripeti">sì</label>
+                    </div>
+                    <div>
+                        <input type="radio" name="non-rip" id="non-rip" value="non-rip">
+                        <label for="non-rip">no</label>
+                    </div>
+                </div>
             </div>
             <button type="submit" class="btn btn-danger">Invia</button>
+            <button type="reset" class="btn btn-secondary">Reset</button>
         </form>
     </div>
     

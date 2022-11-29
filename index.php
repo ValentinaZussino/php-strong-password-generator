@@ -22,10 +22,22 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
     <title>Password Generator</title>
 </head>
 <body>
-    <form action="index.php" method="GET">
-        <label for="">Imposta un numero per la lunghezza della tua password</label>
-        <input type="number" name="lunghezza" placeholder="Inserisci un numero">
-        <button type="submit">Invia</button>
-    </form>
+    <h1>strong password generator</h1>
+    <h2 class="text-white text-center">Genera una password sicura</h2>
+    <div class="vz_container">
+        <form action="index.php" method="GET">
+            <div class="d-flex justify-content-between pb-3">
+                <label for="">Lunghezza della tua password</label>
+                <input type="number" name="lunghezza" placeholder="Inserisci un numero">
+            </div>
+            <div class="d-flex justify-content-between pb-3">
+                <label for="">Consenti ripetizioni di uno o più caratteri</label>
+                <input type="radio" name="ripeti" id="ripeti" value="ripeti"> sì
+                <input type="radio" name="non-rip" id="non-rip" value="non-rip"> no
+            </div>
+            <button type="submit" class="btn btn-danger">Invia</button>
+        </form>
+    </div>
+    
 </body>
 </html>

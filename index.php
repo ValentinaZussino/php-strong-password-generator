@@ -3,9 +3,8 @@ session_start();
 // importo functions
 include __DIR__ .'/functions/functions.php';
 // controllo if lunghezza is set e non vuota per chiamarci dentro funzione
-if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ripeti'])){
+if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ripeti']) && $_POST['lunghezza'] <= 40){
     // $password = pswGen($_POST['lunghezza']);
-
     $alfabeto = 'abcdefghijklmnopqrstuvwxyz';
     $upperalfabeto = strtoupper($alfabeto);
     $numeri = '0123456789';
@@ -48,9 +47,9 @@ if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ri
     <h1>strong password generator</h1>
     <h2 class="text-white text-center">Genera una password sicura</h2>
         <?php if(isset($_POST['lunghezza'])){
-            if(empty($_POST['lunghezza'])){ ?>
+            if(empty($_POST['lunghezza']) || $_POST['lunghezza'] > 40){ ?>
             <div class="alert alert-danger w-50 m-auto mt-4">
-                <p>Inserisci un numero</p>
+                <p>Puoi inserire un numero da 1 a 40</p>
             </div>
         <?php } }?>
     <div class="vz_container">
@@ -69,6 +68,24 @@ if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ri
                     <div>
                         <input type="radio" name="ripeti" id="non-rip" value="non-rip">
                         <label for="non-rip">no</label>
+                    </div>
+                    <div class="d-flex flex-column pt-3">
+                        <div>
+                            <input type="checkbox" name="" id="" value="alfabeto">
+                            <label for="">minuscole</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="" value="upperalfabeto">
+                            <label for="">maiuscole</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="" value="numeri">
+                            <label for="">numeri</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" name="" id="" value="simboli">
+                            <label for="">simboli</label>
+                        </div>
                     </div>
                 </div>
             </div>

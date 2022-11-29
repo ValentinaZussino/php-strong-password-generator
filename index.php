@@ -1,21 +1,9 @@
 <?php
-if(isset($_GET['lunghezza'])){
-    $alfabeto = 'abcdefghijklmnopqrstuvwxyz';
-    $upperalfabeto = strtoupper($alfabeto);
-    $numeri = '0123456789';
-    $simboli = '[]()/<>*#!%&?;@-_.';
-    $unione = $alfabeto.$upperalfabeto.$numeri.$simboli;
-    var_dump($unione);
-    $password = '';
-    var_dump($_GET['lunghezza']);
-    $lung = $_GET['lunghezza'];
-    // while lunghezza$password non è uguale a $lung continua a prelevare da $unione
-
-    while(strlen($password) < $lung){
-        $elem = rand(0, strlen($unione)-1);
-        $prova = substr($unione,$elem,1);
-        $password .= $prova;
-    }
+// importo functions
+include __DIR__ .'/functions.php';
+// controllo if lunghezza is set per chiamarci dentro funzione
+if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
+    $password = pswGen($_GET['lunghezza']);
     echo $password;
 }
 

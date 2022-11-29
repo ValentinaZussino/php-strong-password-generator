@@ -7,7 +7,7 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
     $password = pswGen($_GET['lunghezza']);
     $_SESSION['psw'] = $password;
     header('Location: ./results.php');
-}
+};
 ?>
 
 <!DOCTYPE html>
@@ -24,6 +24,12 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
 <body>
     <h1>strong password generator</h1>
     <h2 class="text-white text-center">Genera una password sicura</h2>
+        <?php if(isset($_GET['lunghezza'])){
+            if(empty($_GET['lunghezza'])){ ?>
+            <div class="alert alert-danger w-50 m-auto mt-4">
+                <p>Inserisci un numero</p>
+            </div>
+        <?php } } ?>
     <div class="vz_container">
         <form action="index.php" method="GET">
             <div class="d-flex justify-content-between pb-5">

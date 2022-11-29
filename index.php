@@ -3,7 +3,7 @@ session_start();
 // importo functions
 include __DIR__ .'/functions/functions.php';
 // controllo if lunghezza is set e non vuota per chiamarci dentro funzione
-if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ripeti']) && $_POST['lunghezza'] <= 40){
+if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && $_POST['lunghezza'] <= 40 && isset($_POST['ripeti']) && isset($_POST['check'])){
     // $password = pswGen($_POST['lunghezza']);
     $alfabeto = 'abcdefghijklmnopqrstuvwxyz';
     $upperalfabeto = strtoupper($alfabeto);
@@ -13,13 +13,29 @@ if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ri
     $password = '';
     $lung = $_POST['lunghezza'];
     $radio = $_POST['ripeti'];
-    // while lunghezza$password non è uguale a $lung continua a prelevare da $unione
+    $check = $_POST['check'];
+    $unioneDue = '';
+    foreach($check as $checked){
+        // var_dump($checked);
+        if($checked == 'alfabeto'){
+            $unioneDue .= $alfabeto;
+        } else if($checked == 'upperalfabeto'){
+            $unioneDue .= $upperalfabeto;
+        } else if ($checked == 'numeri'){
+            $unioneDue .= $numeri;
+        } else if ($checked == 'simboli'){
+            $unioneDue .= $simboli;
+        }
+    };
+    var_dump($unioneDue);
+     // while lunghezza$password non è uguale a $lung continua a prelevare da $unione
     while(strlen($password) < $lung){
+        // con controllo sui radio
         if($radio == 'ripeti'){
-            $elemento = getElem($unione);
+            $elemento = getElem($unioneDue);
             $password .= $elemento;
         }else{
-            $elemento = getElem($unione);
+            $elemento = getElem($unioneDue);
             if(!str_contains($password, $elemento)){
                 $password .= $elemento;
             }
@@ -71,19 +87,19 @@ if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ri
                     </div>
                     <div class="d-flex flex-column pt-3">
                         <div>
-                            <input type="checkbox" name="" id="" value="alfabeto">
+                            <input type="checkbox" name="check[]" id="" value="alfabeto">
                             <label for="">minuscole</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="" id="" value="upperalfabeto">
+                            <input type="checkbox" name="check[]" id="" value="upperalfabeto">
                             <label for="">maiuscole</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="" id="" value="numeri">
+                            <input type="checkbox" name="check[]" id="" value="numeri">
                             <label for="">numeri</label>
                         </div>
                         <div>
-                            <input type="checkbox" name="" id="" value="simboli">
+                            <input type="checkbox" name="check[]" id="" value="simboli">
                             <label for="">simboli</label>
                         </div>
                     </div>

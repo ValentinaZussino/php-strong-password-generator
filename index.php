@@ -3,8 +3,31 @@ session_start();
 // importo functions
 include __DIR__ .'/functions/functions.php';
 // controllo if lunghezza is set e non vuota per chiamarci dentro funzione
-if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
-    $password = pswGen($_GET['lunghezza']);
+if(isset($_POST['lunghezza']) && !empty($_POST['lunghezza']) && isset($_POST['ripeti'])){
+    // $password = pswGen($_POST['lunghezza']);
+
+    $alfabeto = 'abcdefghijklmnopqrstuvwxyz';
+    $upperalfabeto = strtoupper($alfabeto);
+    $numeri = '0123456789';
+    $simboli = '[]()/<>*#!%&?;@-_.';
+    $unione = $alfabeto.$upperalfabeto.$numeri.$simboli;
+    $password = '';
+    $lung = $_POST['lunghezza'];
+    $radio = $_POST['ripeti'];
+    // while lunghezza$password non è uguale a $lung continua a prelevare da $unione
+    while(strlen($password) < $lung){
+        if($radio == 'ripeti'){
+            $elemento = getElem($unione);
+            $password .= $elemento;
+        }else{
+            $elemento = getElem($unione);
+            if(!str_contains($password, $elemento)){
+                $password .= $elemento;
+            }
+        }
+    }
+    $password = str_shuffle($password);
+
     $_SESSION['psw'] = $password;
     header('Location: ./results.php');
 };
@@ -24,14 +47,14 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
 <body>
     <h1>strong password generator</h1>
     <h2 class="text-white text-center">Genera una password sicura</h2>
-        <?php if(isset($_GET['lunghezza'])){
-            if(empty($_GET['lunghezza'])){ ?>
+        <?php if(isset($_POST['lunghezza'])){
+            if(empty($_POST['lunghezza'])){ ?>
             <div class="alert alert-danger w-50 m-auto mt-4">
                 <p>Inserisci un numero</p>
             </div>
-        <?php } } ?>
+        <?php } }?>
     <div class="vz_container">
-        <form action="index.php" method="GET">
+        <form action="index.php" method="POST">
             <div class="d-flex justify-content-between pb-5">
                 <label for="">Lunghezza della tua password</label>
                 <input type="number" name="lunghezza" placeholder="Inserisci un numero">
@@ -40,11 +63,11 @@ if(isset($_GET['lunghezza']) && !empty($_GET['lunghezza'])){
                 <label for="">Consenti ripetizioni di uno o più caratteri</label>
                 <div class="d-flex flex-column">
                     <div>
-                        <input type="radio" name="ripeti" id="ripeti" value="ripeti">
+                        <input checked type="radio" name="ripeti" id="ripeti" value="ripeti">
                         <label for="ripeti">sì</label>
                     </div>
                     <div>
-                        <input type="radio" name="non-rip" id="non-rip" value="non-rip">
+                        <input type="radio" name="ripeti" id="non-rip" value="non-rip">
                         <label for="non-rip">no</label>
                     </div>
                 </div>

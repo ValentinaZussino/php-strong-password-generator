@@ -7,8 +7,8 @@ function pswGen($lung){
     $unione = $alfabeto.$upperalfabeto.$numeri.$simboli;
     // var_dump($unione);
     $password = '';
-    // var_dump($_GET['lunghezza']);
-    $lung = $_GET['lunghezza'];
+    // var_dump($_POST['lunghezza']);
+    $lung = $_POST['lunghezza'];
     
     // while lunghezza$password non è uguale a $lung continua a prelevare da $unione
 
@@ -19,4 +19,10 @@ function pswGen($lung){
     }
     // echo $password;
     return $password = str_shuffle($password);
-}
+};
+
+function getElem($var){
+    $random = rand(0, strlen($var)-1);
+    $elemento = substr($var,$random,1);
+    return $elemento;
+};
